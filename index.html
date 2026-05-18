@@ -1,231 +1,367 @@
-export default function Prank520Website() {
-  const randomMessages = [
-    '系统正在验证真心...',
-    '检测到恋爱脑浓度过高...',
-    'AI正在分析你的嘴硬程度...',
-    '爱情服务器已超载...',
-    '正在匹配你的舔狗等级...',
-  ];
-
-  const escapeButton = (e) => {
-    const btn = e.target;
-    const maxX = window.innerWidth - 150;
-    const maxY = window.innerHeight - 80;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    btn.style.position = 'fixed';
-    btn.style.left = `${x}px`;
-    btn.style.top = `${y}px`;
-    btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
-  };
-
-  const fakeLoading = () => {
-    const overlay = document.createElement('div');
-    overlay.innerHTML = `
-      <div id="loadingBox" style="
-        position:fixed;
-        inset:0;
-        background:rgba(0,0,0,0.92);
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        z-index:99999;
-        color:white;
-        font-family:sans-serif;
-      ">
-        <h1 style="font-size:42px;margin-bottom:30px;">❤️ 恋爱系统启动中...</h1>
-        <div style="width:320px;height:22px;background:#333;border-radius:999px;overflow:hidden;">
-          <div id="bar" style="height:100%;width:0%;background:linear-gradient(90deg,#ff4d6d,#ff8fab);"></div>
-        </div>
-        <p id="text" style="margin-top:20px;color:#aaa;font-size:18px;">${randomMessages[0]}</p>
-      </div>
-    `;
-
-    document.body.appendChild(overlay);
-
-    const bar = overlay.querySelector('#bar');
-    const text = overlay.querySelector('#text');
-
-    let progress = 0;
-
-    const timer = setInterval(() => {
-      progress += Math.random() * 15;
-      bar.style.width = `${progress}%`;
-      text.innerText = randomMessages[Math.floor(Math.random() * randomMessages.length)];
-
-      if (progress >= 100) {
-        clearInterval(timer);
-
-        setTimeout(() => {
-          overlay.innerHTML = `
-            <div style="text-align:center;padding:20px;">
-              <h1 style="font-size:70px;">🤡</h1>
-              <h2 style="font-size:38px;margin-top:20px;">你居然真信了？</h2>
-              <p style="margin-top:15px;color:#999;font-size:20px;">
-                本次520表白由“全国深情种协会”特别诈骗播出
-              </p>
-
-              <button id="continueBtn" style="
-                margin-top:35px;
-                padding:14px 40px;
-                border:none;
-                border-radius:999px;
-                background:#ff4d6d;
-                color:white;
-                font-size:20px;
-                cursor:pointer;
-              ">
-                我不服，再试一次
-              </button>
-            </div>
-          `;
-
-          overlay.querySelector('#continueBtn').onclick = () => {
-            overlay.remove();
-            trollDesktop();
-          };
-        }, 1200);
-      }
-    }, 280);
-  };
-
-  const trollDesktop = () => {
-    const container = document.createElement('div');
-    container.style.position = 'fixed';
-    container.style.inset = '0';
-    container.style.zIndex = '999999';
-    container.style.background = 'linear-gradient(135deg,#111,#000)';
-    container.style.overflow = 'hidden';
-
-    document.body.appendChild(container);
-
-    for (let i = 0; i < 25; i++) {
-      const popup = document.createElement('div');
-
-      popup.innerHTML = `
-        <div style="
-          width:260px;
-          background:white;
-          border-radius:20px;
-          box-shadow:0 10px 40px rgba(0,0,0,.4);
-          padding:18px;
-          font-family:sans-serif;
-        ">
-          <h3 style="margin:0;color:#ff4d6d;">⚠ 恋爱警告</h3>
-          <p style="margin-top:10px;color:#444;line-height:1.5;">
-            检测到用户存在严重恋爱幻想，请立即停止深情。
-          </p>
-          <button style="
-            margin-top:12px;
-            width:100%;
-            border:none;
-            background:black;
-            color:white;
-            padding:10px;
-            border-radius:12px;
-          ">
-            知道了（但下次还敢）
-          </button>
-        </div>
-      `;
-
-      popup.style.position = 'absolute';
-      popup.style.left = Math.random() * window.innerWidth + 'px';
-      popup.style.top = Math.random() * window.innerHeight + 'px';
-      popup.style.animation = `float${i} 2s infinite alternate ease-in-out`;
-
-      container.appendChild(popup);
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI智能告白系统</title>
+  <style>
+    /* 基础重置与背景 */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
     }
 
-    const endBtn = document.createElement('button');
-    endBtn.innerText = '关闭恶搞';
+    .main-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to bottom right, #ec4899, #fb7185, #ef4444);
+      color: white;
+    }
 
-    endBtn.style.position = 'fixed';
-    endBtn.style.bottom = '30px';
-    endBtn.style.left = '50%';
-    endBtn.style.transform = 'translateX(-50%)';
-    endBtn.style.padding = '16px 45px';
-    endBtn.style.border = 'none';
-    endBtn.style.borderRadius = '999px';
-    endBtn.style.background = '#ff4d6d';
-    endBtn.style.color = 'white';
-    endBtn.style.fontSize = '20px';
-    endBtn.style.cursor = 'pointer';
+    /* 点状网格背景 */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at center, white 1px, transparent 1px);
+      background-size: 35px 35px;
+      opacity: 0.2;
+      pointer-events: none; /* 防止遮挡点击 */
+    }
 
-    endBtn.onmouseenter = escapeButton;
+    /* 毛玻璃卡片 */
+    .glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 40px;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      max-width: 42rem;
+      width: 90%;
+      box-sizing: border-box;
+    }
 
-    endBtn.onclick = () => {
-      container.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          flex-direction:column;
-          color:white;
-          font-family:sans-serif;
-          text-align:center;
-        ">
-          <h1 style="font-size:90px;">🤣🤣🤣</h1>
-          <h2 style="font-size:45px;">520快乐，但你还是单身</h2>
-          <p style="margin-top:20px;color:#888;font-size:20px;">
-            截图发朋友圈效果更佳
-          </p>
-        </div>
-      `;
-    };
+    /* 文本样式 */
+    h1 {
+      font-size: 3.75rem;
+      font-weight: 900;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
 
-    container.appendChild(endBtn);
-  };
+    .subtitle-1 {
+      font-size: 1.5rem;
+      line-height: 1.625;
+      opacity: 0.9;
+      margin: 0 0 0.75rem 0;
+    }
 
-  return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-pink-500 via-rose-400 to-red-500 flex items-center justify-center text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)] bg-[length:35px_35px] opacity-20" />
+    .subtitle-2 {
+      font-size: 1.875rem;
+      font-weight: bold;
+      margin: 0 0 2.5rem 0;
+    }
 
-      <div className="relative z-10 backdrop-blur-2xl bg-white/10 border border-white/20 rounded-[40px] px-12 py-14 shadow-2xl text-center max-w-2xl">
-        <h1 className="text-6xl font-black mb-6 animate-pulse">
-          💘 AI智能告白系统
-        </h1>
+    /* 按钮容器与按钮 */
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-        <p className="text-2xl leading-relaxed opacity-90 mb-3">
-          系统通过大数据分析、聊天记录追踪、朋友圈偷窥
-        </p>
+    button {
+      outline: none;
+      font-family: inherit;
+    }
 
-        <p className="text-3xl font-bold mb-10">
-          认定你已经偷偷喜欢很久了 ❤️
-        </p>
+    .btn-accept {
+      background: white;
+      color: #db2777;
+      font-weight: 900;
+      padding: 1.25rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease;
+    }
+    .btn-accept:hover {
+      transform: scale(1.1);
+    }
 
-        <div className="flex justify-center gap-8 flex-wrap">
-          <button
-            onMouseEnter={escapeButton}
-            onClick={escapeButton}
-            className="bg-white text-pink-600 font-black px-10 py-5 rounded-full text-2xl shadow-2xl hover:scale-110 transition-all"
-          >
-            我愿意 😳
-          </button>
+    .btn-think {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      font-weight: bold;
+      padding: 1.25rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .btn-think:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
 
-          <button
-            onClick={fakeLoading}
-            className="bg-black/30 border border-white/30 text-white font-bold px-10 py-5 rounded-full text-2xl hover:bg-black/50 transition-all"
-          >
-            考虑一下 🤔
-          </button>
-        </div>
+    .tips {
+      margin-top: 2.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      line-height: 2;
+    }
 
-        <div className="mt-10 text-white/70 text-sm leading-7">
-          ⚠ 温馨提示：点击“我愿意”成功率仅 0.0001%<br />
-          ⚠ 本系统已接入深情防沉迷机制<br />
-          ⚠ 单身用户禁止急眼
-        </div>
+    .copyright {
+      position: absolute;
+      bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* 动画 */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .7; }
+    }
+    
+    @keyframes floating {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    <div class="bg-pattern"></div>
+
+    <div class="glass-card">
+      <h1>💘 AI智能告白系统</h1>
+      <p class="subtitle-1">系统通过大数据分析、聊天记录追踪、朋友圈偷窥</p>
+      <p class="subtitle-2">认定你已经偷偷喜欢很久了 ❤️</p>
+
+      <div class="btn-group">
+        <button id="btnAccept" class="btn-accept">我愿意 😳</button>
+        <button id="btnThink" class="btn-think">考虑一下 🤔</button>
       </div>
 
-      <div className="absolute bottom-6 text-sm text-white/60">
-        © 2026 DeepLove AI · 全国单身联盟技术支持
+      <div class="tips">
+        ⚠ 温馨提示：点击“我愿意”成功率仅 0.0001%<br />
+        ⚠ 本系统已接入深情防沉迷机制<br />
+        ⚠ 单身用户禁止急眼
       </div>
     </div>
-  );
-}
 
+    <div class="copyright">
+      © 2026 DeepLove AI · 全国单身联盟技术支持
+    </div>
+  </div>
+
+  <script>
+    const randomMessages = [
+      '系统正在验证真心...',
+      '检测到恋爱脑浓度过高...',
+      'AI正在分析你的嘴硬程度...',
+      '爱情服务器已超载...',
+      '正在匹配你的舔狗等级...'
+    ];
+
+    // 躲避按钮逻辑
+    const escapeButton = (e) => {
+      const btn = e.target;
+      const maxX = window.innerWidth - 150;
+      const maxY = window.innerHeight - 80;
+
+      const x = Math.max(0, Math.random() * maxX);
+      const y = Math.max(0, Math.random() * maxY);
+
+      btn.style.position = 'fixed';
+      btn.style.left = `${x}px`;
+      btn.style.top = `${y}px`;
+      btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+      btn.style.zIndex = '9999';
+    };
+
+    // 假装加载逻辑
+    const fakeLoading = () => {
+      const overlay = document.createElement('div');
+      overlay.innerHTML = `
+        <div id="loadingBox" style="
+          position:fixed;
+          inset:0;
+          background:rgba(0,0,0,0.92);
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          z-index:99999;
+          color:white;
+        ">
+          <h1 style="font-size:42px;margin-bottom:30px;animation:none;">❤️ 恋爱系统启动中...</h1>
+          <div style="width:320px;height:22px;background:#333;border-radius:999px;overflow:hidden;">
+            <div id="bar" style="height:100%;width:0%;background:linear-gradient(90deg,#ff4d6d,#ff8fab);transition:width 0.2s;"></div>
+          </div>
+          <p id="loadingText" style="margin-top:20px;color:#aaa;font-size:18px;">${randomMessages[0]}</p>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+
+      const bar = overlay.querySelector('#bar');
+      const text = overlay.querySelector('#loadingText');
+      let progress = 0;
+
+      const timer = setInterval(() => {
+        progress += Math.random() * 15;
+        if(progress > 100) progress = 100;
+        
+        bar.style.width = `${progress}%`;
+        text.innerText = randomMessages[Math.floor(Math.random() * randomMessages.length)];
+
+        if (progress >= 100) {
+          clearInterval(timer);
+
+          setTimeout(() => {
+            overlay.innerHTML = `
+              <div style="position:fixed;inset:0;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;color:white;text-align:center;padding:20px;">
+                <h1 style="font-size:70px;margin:0;animation:none;">🤡</h1>
+                <h2 style="font-size:38px;margin-top:20px;">你居然真信了？</h2>
+                <p style="margin-top:15px;color:#999;font-size:20px;">
+                  本次520表白由“全国深情种协会”特别诈骗播出
+                </p>
+                <button id="continueBtn" style="
+                  margin-top:35px;
+                  padding:14px 40px;
+                  border:none;
+                  border-radius:999px;
+                  background:#ff4d6d;
+                  color:white;
+                  font-size:20px;
+                  cursor:pointer;
+                ">我不服，再试一次</button>
+              </div>
+            `;
+
+            overlay.querySelector('#continueBtn').onclick = () => {
+              overlay.remove();
+              trollDesktop();
+            };
+          }, 1200);
+        }
+      }, 280);
+    };
+
+    // 恶搞弹窗逻辑
+    const trollDesktop = () => {
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.inset = '0';
+      container.style.zIndex = '999999';
+      container.style.background = 'linear-gradient(135deg,#111,#000)';
+      container.style.overflow = 'hidden';
+
+      document.body.appendChild(container);
+
+      // 生成满屏弹窗
+      for (let i = 0; i < 25; i++) {
+        const popup = document.createElement('div');
+        popup.innerHTML = `
+          <div style="
+            width:260px;
+            background:white;
+            border-radius:20px;
+            box-shadow:0 10px 40px rgba(0,0,0,.4);
+            padding:18px;
+            color:black;
+          ">
+            <h3 style="margin:0;color:#ff4d6d;font-size:18px;">⚠ 恋爱警告</h3>
+            <p style="margin-top:10px;color:#444;line-height:1.5;font-size:14px;">
+              检测到用户存在严重恋爱幻想，请立即停止深情。
+            </p>
+            <button style="
+              margin-top:12px;
+              width:100%;
+              border:none;
+              background:black;
+              color:white;
+              padding:10px;
+              border-radius:12px;
+              cursor:pointer;
+            ">知道了（但下次还敢）</button>
+          </div>
+        `;
+
+        popup.style.position = 'absolute';
+        popup.style.left = Math.random() * (window.innerWidth - 260) + 'px';
+        popup.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+        popup.style.animation = `floating ${1.5 + Math.random()}s infinite alternate ease-in-out`;
+        popup.style.animationDelay = `${Math.random()}s`;
+
+        container.appendChild(popup);
+      }
+
+      // 躲避的关闭按钮
+      const endBtn = document.createElement('button');
+      endBtn.innerText = '关闭恶搞';
+      endBtn.style.position = 'fixed';
+      endBtn.style.bottom = '30px';
+      endBtn.style.left = '50%';
+      endBtn.style.transform = 'translateX(-50%)';
+      endBtn.style.padding = '16px 45px';
+      endBtn.style.border = 'none';
+      endBtn.style.borderRadius = '999px';
+      endBtn.style.background = '#ff4d6d';
+      endBtn.style.color = 'white';
+      endBtn.style.fontSize = '20px';
+      endBtn.style.cursor = 'pointer';
+      endBtn.style.zIndex = '9999999';
+
+      endBtn.onmouseenter = escapeButton;
+      endBtn.onclick = () => {
+        container.innerHTML = `
+          <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            color:white;
+            text-align:center;
+          ">
+            <h1 style="font-size:90px;margin:0;animation:none;">🤣🤣🤣</h1>
+            <h2 style="font-size:45px;margin:20px 0;">520快乐，但你还是单身</h2>
+            <p style="margin-top:20px;color:#888;font-size:20px;">
+              截图发朋友圈效果更佳
+            </p>
+          </div>
+        `;
+      };
+
+      container.appendChild(endBtn);
+    };
+
+    // 绑定初始按钮事件
+    const btnAccept = document.getElementById('btnAccept');
+    const btnThink = document.getElementById('btnThink');
+
+    btnAccept.addEventListener('mouseenter', escapeButton);
+    btnAccept.addEventListener('click', escapeButton);
+    btnThink.addEventListener('click', fakeLoading);
+  </script>
+</body>
+</html>
