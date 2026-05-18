@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>520 情感账户全面资产审查</title>
   <style>
     body, html {
@@ -11,9 +11,10 @@
       width: 100%;
       height: 100vh;
       overflow: hidden;
-      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
       background-color: #fff1f2;
       color: #881337;
+      -webkit-tap-highlight-color: transparent; /* 消除手机点击高亮蓝色框 */
     }
 
     /* 粉色流动渐变背景 */
@@ -26,7 +27,7 @@
       justify-content: center;
       background: linear-gradient(270deg, #ffe4e6, #fff1f2, #ffe4e6, #fff1f2, #ffe4e6);
       background-size: 800% 800%;
-      animation: movingGradient 30s ease infinite;
+      animation: movingGradient 20s ease infinite;
     }
 
     @keyframes movingGradient {
@@ -46,105 +47,88 @@
       z-index: 1;
     }
 
-    /* 伪装磨砂玻璃卡片 */
+    /* 手机端自适应磨砂玻璃卡片 */
     .glass-card {
       position: relative;
       z-index: 10;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border: 2px solid #f43f5e;
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      box-shadow: 0 15px 35px rgba(244, 63, 94, 0.15);
+      border-radius: 20px;
+      padding: 2rem 1.5rem; /* 针对手机缩小内边距，防止内容塞不下 */
+      box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15);
       text-align: center;
-      max-width: 38rem;
-      width: 90%;
+      max-width: 90%;
+      width: 22rem;
       box-sizing: border-box;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: vividPulse 8s infinite alternate;
+      animation: vividPulse 6s infinite alternate;
     }
 
     @keyframes vividPulse {
-      0% { transform: scale(1); box-shadow: 0 15px 35px rgba(244, 63, 94, 0.15); }
-      100% { transform: scale(1.02); box-shadow: 0 15px 45px rgba(244, 63, 94, 0.25); }
+      0% { transform: scale(1); box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15); }
+      100% { transform: scale(1.02); box-shadow: 0 15px 35px rgba(244, 63, 94, 0.25); }
     }
 
-    /* 双栏合并终极卡片样式 */
+    /* 终极卡片手机布局优化 */
     .glass-card.final-layout {
-      max-width: 52rem;
+      width: 92%;
+      max-width: 24rem;
       display: flex;
-      flex-direction: row;
+      flex-direction: column; /* 手机端强制改为上下布局 */
       align-items: center;
-      gap: 2rem;
-      padding: 2.5rem;
-      text-align: left;
+      gap: 1.2rem;
+      padding: 1.5rem;
     }
 
     .final-left {
-      flex: 1;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      text-align: center;
     }
 
     .final-right {
-      width: 240px;
+      width: 150px; /* 手机端缩小照片尺寸 */
       flex-shrink: 0;
     }
 
     .final-photo {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 12px;
       border: 3px solid #f43f5e;
-      box-shadow: 0 8px 24px rgba(244, 63, 94, 0.3);
-      animation: photoBounce 4s ease-in-out infinite;
+      box-shadow: 0 6px 15px rgba(244, 63, 94, 0.3);
+      animation: photoBounce 3s ease-in-out infinite;
     }
 
     @keyframes photoBounce {
       0%, 100% { transform: translateY(0) rotate(2deg); }
-      50% { transform: translateY(-8px) rotate(-2deg); }
-    }
-
-    @media (max-width: 768px) {
-      .glass-card.final-layout {
-        flex-direction: column;
-        text-align: center;
-        padding: 2rem 1.5rem;
-      }
-      .final-right {
-        width: 180px;
-        margin-top: 1rem;
-      }
+      50% { transform: translateY(-6px) rotate(-2deg); }
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 1.6rem; /* 针对移动端优化字体大小 */
       color: #e11d48;
       margin-top: 0;
-      margin-bottom: 1.5rem;
-      animation: vividTilt 6s infinite ease-in-out;
-    }
-
-    @keyframes vividTilt {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(1deg); }
+      margin-bottom: 1rem;
     }
 
     .subtitle {
-      font-size: 1.1rem;
-      line-height: 1.8;
+      font-size: 0.95rem;
+      line-height: 1.6;
       color: #4c0519;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.8rem;
       opacity: 0.9;
     }
 
+    /* 移动端专属按钮组：改为垂直排列更易单手点击 */
     .btn-group {
       display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-top: 20px;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 15px;
     }
 
     button {
@@ -152,8 +136,9 @@
       font-family: inherit;
       border: none;
       border-radius: 999px;
-      font-size: 1.1rem;
-      padding: 0.9rem 2.5rem;
+      font-size: 1.05rem;
+      padding: 0.85rem 0;
+      width: 100%; /* 按钮撑满整行 */
       cursor: pointer;
       font-weight: bold;
       transition: all 0.2s ease;
@@ -163,11 +148,7 @@
     .btn-primary {
       background: linear-gradient(135deg, #ec4899, #f43f5e);
       color: white;
-      box-shadow: 0 4px 14px rgba(244, 63, 94, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(244, 63, 94, 0.6);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
     }
 
     .btn-secondary {
@@ -176,45 +157,26 @@
       border: 1px solid #fda4af;
     }
 
-    button::after {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      width: calc(100% + 20px);
-      height: calc(100% + 20px);
-      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    button:hover::after { opacity: 1; }
-
-    /* 输入框 */
+    /* 输入框适配 */
     .fake-input {
       width: 100%;
-      padding: 1rem;
+      padding: 0.8rem;
       border: 2px solid #fbcfe8;
       border-radius: 12px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #e11d48;
       background: white;
       box-sizing: border-box;
       outline: none;
       text-align: center;
-      transition: all 0.3s ease;
-    }
-    .fake-input:focus {
-      border-color: #f43f5e;
-      box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
     }
 
-    /* 扫描器 */
+    /* 扫描器适配 */
     .radar-container {
       position: relative;
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 20px;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 15px;
     }
     .radar-box {
       position: absolute;
@@ -227,10 +189,12 @@
     }
     .radar-face-preview {
       position: absolute;
-      inset: 5px;
+      inset: 3px;
       border-radius: 50%;
+      width: calc(100% - 6px);
+      height: calc(100% - 6px);
       object-fit: cover;
-      filter: blur(15px); /* 初始极度模糊 */
+      filter: blur(12px);
       transition: filter 4s linear;
       z-index: 1;
     }
@@ -242,12 +206,11 @@
       height: 100%;
       background: linear-gradient(to bottom, rgba(244,63,94,0), rgba(244,63,94,0.5));
       animation: scan 1.5s linear infinite;
-      transform-origin: bottom center;
       z-index: 3;
     }
     @keyframes scan {
-      0% { transform: translateY(-160px); }
-      100% { transform: translateY(160px); }
+      0% { transform: translateY(-130px); }
+      100% { transform: translateY(130px); }
     }
 
     /* 协议勾选 */
@@ -255,62 +218,35 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.8rem 1rem;
+      padding: 0.6rem 0.8rem;
       background: white;
-      margin-bottom: 10px;
-      border-radius: 12px;
+      margin-bottom: 8px;
+      border-radius: 10px;
       border: 1px solid #ffe4e6;
-    }
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-    }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      inset: 0;
-      background-color: #f43f5e;
-      transition: .4s;
-      border-radius: 34px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-      transform: translateX(24px);
+      font-size: 0.85rem;
     }
 
-    /* 警告弹窗 */
+    /* 警告弹窗手机大小优化 */
     .alert-popup {
       position: absolute;
-      width: 280px;
+      width: 240px;
       background: #fff1f2;
       border: 2px solid #ef4444;
-      border-radius: 16px;
-      padding: 1.2rem;
-      box-shadow: 0 20px 25px -5px rgba(159, 18, 57, 0.2);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 15px 20px rgba(159, 18, 57, 0.2);
       color: #991b1b;
       z-index: 99999;
-      animation: vividPopup 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      animation: vividPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     @keyframes vividPopup {
-      0% { transform: scale(0.1) rotate(-10deg); opacity: 0; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    /* 进度条 */
     .progress-bound {
       width: 100%;
-      height: 16px;
+      height: 12px;
       background: #ffe4e6;
       border-radius: 999px;
       overflow: hidden;
@@ -325,8 +261,8 @@
 
     @keyframes shake {
       0%, 100% { transform: translate(0, 0); }
-      10%, 30%, 50%, 70%, 90% { transform: translate(-10px, 0); }
-      20%, 40%, 60%, 80% { transform: translate(10px, 0); }
+      10%, 30%, 50%, 70%, 90% { transform: translate(-6px, 0); }
+      20%, 40%, 60%, 80% { transform: translate(6px, 0); }
     }
     .shake-effect { animation: shake 0.4s ease-in-out; }
   </style>
@@ -337,11 +273,11 @@
     <canvas id="heartCanvas"></canvas>
 
     <div class="glass-card" id="mainCard">
-      <h1>🌸 520 情感账户核心资产审查</h1>
+      <h1>🌸 520 情感账户资产审查</h1>
       <p class="subtitle">
         检测到您的IP地址在“深情领地”异常登录。<br>
-        为了您的财产与智商安全，请协助完成以下网络人格五轨审查。<br>
-        <span style="color:#e11d48; font-size:0.9rem; font-weight:bold;">* 拒绝验证将导致脱单功能永久锁定 *</span>
+        为了您的安全，请完成以下网络人格五轨审查。<br>
+        <span style="color:#e11d48; font-size:0.85rem; font-weight:bold;">* 拒绝验证将导致脱单功能永久锁定 *</span>
       </p>
 
       <div class="btn-group">
@@ -356,7 +292,7 @@
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
     
-    // 你的专属恶搞照片文件名定义
+    // 照片文件名定义
     const MY_PHOTO = "sun.jpg";
 
     function resizeCanvas() {
@@ -366,17 +302,17 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Canvas 爱心粒子发射系统
+    // Canvas 爱心雨
     const hearts = [];
     class Heart {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = -Math.random() * canvas.height;
-        this.size = Math.random() * 20 + 12;
-        this.speed = Math.random() * 2 + 1.5;
-        this.drift = Math.sin(Math.random() * 2) * 0.4;
+        this.size = Math.random() * 15 + 10; // 手机端稍微缩小爱心
+        this.speed = Math.random() * 1.5 + 1.2;
+        this.drift = Math.sin(Math.random() * 2) * 0.3;
         this.color = Math.random() < 0.6 ? '#f43f5e' : '#fda4af';
-        this.opacity = Math.random() * 0.5 + 0.4;
+        this.opacity = Math.random() * 0.4 + 0.4;
       }
       update() {
         this.y += this.speed;
@@ -396,7 +332,7 @@
       }
     }
 
-    for (let i = 0; i < 55; i++) { hearts.push(new Heart()); }
+    for (let i = 0; i < 35; i++) { hearts.push(new Heart()); } // 降低手机端粒子数量，保障丝滑不卡顿
 
     function animateHearts() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -405,26 +341,31 @@
     }
     animateHearts();
 
-    // ==================== 关卡 1：拒绝者的无休止弹窗 ====================
+    // ==================== 关卡 1：手机端完美错开点击（瞬移恶搞） ====================
     let rejectCount = 0;
     const initPrank = () => {
       const btnNo = document.getElementById('btnNo');
       if(!btnNo) return;
       
       const escapeAndPrank = (e) => {
+        e.preventDefault(); // 阻止手机端默认点击行为触发
         rejectCount++;
         if (rejectCount <= 3) {
-          const maxX = window.innerWidth - 150;
-          const maxY = window.innerHeight - 60;
+          // 确保瞬移位置在手机屏幕安全可视区域内（扣除按钮自身宽高）
+          const maxX = window.innerWidth - 130;
+          const maxY = window.innerHeight - 50;
           btnNo.style.position = 'fixed';
-          btnNo.style.left = `${Math.max(20, Math.random() * maxX)}px`;
-          btnNo.style.top = `${Math.max(20, Math.random() * maxY)}px`;
-          btnNo.innerText = `点不到我 😜 (${rejectCount}/3)`;
+          btnNo.style.width = '120px'; // 瞬移时缩小体积，更好玩
+          btnNo.style.left = `${Math.max(15, Math.random() * maxX)}px`;
+          btnNo.style.top = `${Math.max(15, Math.random() * maxY)}px`;
+          btnNo.innerText = `😜 (${rejectCount}/3)`;
         } else {
           triggerWarningPopups();
         }
       };
-      btnNo.addEventListener('mouseenter', escapeAndPrank);
+      
+      // 适配手机端的触摸和点击事件
+      btnNo.addEventListener('touchstart', escapeAndPrank);
       btnNo.addEventListener('click', escapeAndPrank);
     };
 
@@ -432,27 +373,28 @@
       mainCard.classList.add('shake-effect');
       setTimeout(() => mainCard.classList.remove('shake-effect'), 500);
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 8; i++) {
         setTimeout(() => {
           const popup = document.createElement('div');
           popup.className = 'alert-popup';
           popup.innerHTML = `
-            <h3 style="margin:0;color:#ef4444;">🚨 严重警告 (Error_520)</h3>
-            <p style="font-size:0.9rem;color:#991b1b;line-height:1.5;margin:10px 0;">
-              检测到您正在强行嘴硬！拒绝配合审查将剥夺2026年度脱单资格！
+            <h3 style="margin:0;color:#ef4444;font-size:1rem;">🚨 嘴硬警告 (Error_520)</h3>
+            <p style="font-size:0.8rem;color:#991b1b;line-height:1.4;margin:8px 0;">
+              拒绝验证将剥夺2026年度脱单资格！
             </p>
-            <button onclick="this.parentElement.remove()" style="width:100%;background:#ef4444;color:white;padding:6px;border:none;border-radius:999px;font-size:0.9rem;cursor:pointer;font-weight:bold;">
-              我错了，马上配合 😭
+            <button onclick="this.parentElement.remove()" style="width:100%;background:#ef4444;color:white;padding:5px 0;border:none;border-radius:999px;font-size:0.85rem;cursor:pointer;font-weight:bold;">
+              我错了，马上验证 😭
             </button>
           `;
-          popup.style.left = `${Math.random() * (window.innerWidth - 280)}px`;
-          popup.style.top = `${Math.random() * (window.innerHeight - 150)}px`;
+          popup.style.left = `${Math.random() * (window.innerWidth - 240)}px`;
+          popup.style.top = `${Math.max(40, Math.random() * (window.innerHeight - 130))}px`;
           document.body.appendChild(popup);
         }, i * 120);
       }
       const btnNo = document.getElementById('btnNo');
       if(btnNo) {
         btnNo.style.position = 'static';
+        btnNo.style.width = '100%';
         btnNo.innerText = "我认输，我验证";
         btnNo.onclick = startStage2;
       }
@@ -461,16 +403,16 @@
     document.getElementById('btnYes').onclick = startStage2;
     initPrank();
 
-    // ==================== 关卡 2：真心话流氓输入 ====================
+    // ==================== 关卡 2：真心话输入劫持 ====================
     function startStage2() {
       document.querySelectorAll('.alert-popup').forEach(p => p.remove());
       
       mainCard.innerHTML = `
         <h1>📝 第一轨：反傲娇内心剖析</h1>
-        <p class="subtitle" style="margin-bottom:1.5rem;">请在下方输入框内，如实输入你的【520年度脱单宣言】：</p>
-        <input type="text" id="typewriterInput" class="fake-input" placeholder="请在这里随意打字敲击键盘..." autocomplete="off">
+        <p class="subtitle" style="margin-bottom:1.2rem;">请在下方输入框内，输入你的【520年度脱单宣言】：</p>
+        <input type="text" id="typewriterInput" class="fake-input" placeholder="请在这里随意打字输入..." autocomplete="off">
         <div class="btn-group">
-          <button id="btnStage2" class="btn-primary" style="opacity:0.5; cursor:not-allowed;" disabled>请先完成输入</button>
+          <button id="btnStage2" class="btn-primary" style="opacity:0.5;" disabled>请先在上方打字</button>
         </div>
       `;
 
@@ -479,55 +421,45 @@
       const btnEl = document.getElementById('btnStage2');
       let currentLength = 0;
 
-      inputEl.addEventListener('keydown', (e) => {
-        e.preventDefault();
-        if (e.key === 'Backspace') {
-          if (currentLength > 0) {
-            currentLength--;
-            inputEl.value = targetText.substring(0, currentLength);
-          }
-        } else if (e.key.length === 1 || e.key === 'Process') {
-          if (currentLength < targetText.length) {
-            currentLength++;
-            inputEl.value = targetText.substring(0, currentLength);
-          }
-        }
+      // 劫持输入框
+      inputEl.addEventListener('input', (e) => {
+        currentLength++;
+        if (currentLength > targetText.length) currentLength = targetText.length;
+        inputEl.value = targetText.substring(0, currentLength);
 
         if (currentLength >= targetText.length) {
           btnEl.removeAttribute('disabled');
           btnEl.style.opacity = '1';
-          btnEl.style.cursor = 'pointer';
-          btnEl.innerText = "承认事实，进入下一步 🤝";
+          btnEl.innerText = "承认事实，下一步 🤝";
         }
       });
 
       btnEl.onclick = startStage3;
     }
 
-    // ==================== 关卡 3：AI 偏好人脸透视（增加模糊照片渐显效果） ====================
+    // ==================== 关卡 3：AI 偏好人脸透视 ====================
     function startStage3() {
       mainCard.innerHTML = `
-        <h1>📷 第二轨：AI 脸部多巴胺扫描</h1>
-        <p class="subtitle" style="margin-bottom:1.5rem;">系统正在尝试调用前置摄像头，分析您的面部异性吸引力指数...</p>
+        <h1>📷 第二轨：脸部多巴胺扫描</h1>
+        <p class="subtitle" style="margin-bottom:1.2rem;">系统正尝试调用前置摄像头，分析您的面部异性吸引力...</p>
         <div class="radar-container">
           <div class="radar-box">
             <div class="radar-line"></div>
             <img src="${MY_PHOTO}" class="radar-face-preview" id="radarImg">
           </div>
         </div>
-        <p id="scanStatus" style="font-weight:bold; color:#db2777;">正在捕捉面部轮廓，请正对屏幕并保持微笑...</p>
+        <p id="scanStatus" style="font-weight:bold; color:#db2777; font-size:0.9rem;">正在捕捉面部轮廓，请保持微笑...</p>
       `;
 
       const statusText = document.getElementById('scanStatus');
       const radarImg = document.getElementById('radarImg');
       
-      // 随着时间推移，扫描框里的照片逐渐稍微清晰一点点
-      setTimeout(() => { if(radarImg) radarImg.style.filter = "blur(6px)"; }, 1500);
+      setTimeout(() => { if(radarImg) radarImg.style.filter = "blur(5px)"; }, 1500);
 
       const phases = [
         "正在扫描胶原蛋白流失速度...",
-        "正在分析单身狗特有的傲娇眼神...",
-        "正在测算嘴角向下微垂的倔强弧度...",
+        "正在分析单身狗特有的眼神...",
+        "正在测算嘴硬判定弧度...",
         "扫描完成！"
       ];
 
@@ -535,43 +467,43 @@
         setTimeout(() => {
           if(statusText) statusText.innerText = text;
           if(index === phases.length - 1) { showScanResult(); }
-        }, (index + 1) * 1200);
+        }, (index + 1) * 1100);
       });
     }
 
     function showScanResult() {
       mainCard.innerHTML = `
         <h1>📊 扫描分析结果报告</h1>
-        <div style="text-align:left; background:white; padding:1.5rem; border-radius:12px; margin-bottom:1.5rem; border:1px solid #fbcfe8; line-height:1.8;">
-          🌸 <b>面部多巴胺浓度：</b> 0.001% (极度缺乏恋爱滋润)<br>
+        <div style="text-align:left; background:white; padding:1rem; border-radius:12px; margin-bottom:1.2rem; border:1px solid #fbcfe8; line-height:1.6; font-size:0.9rem;">
+          🌸 <b>面部多巴胺浓度：</b> 0.001% (缺乏恋爱滋润)<br>
           🌸 <b>傲娇/嘴硬判定：</b> 九段 (无药可救级别)<br>
-          🌸 <b>今日颜值评级：</b> 绝美/超帅 (但可惜目前是个单身贵族)
+          🌸 <b>今日颜值评级：</b> 绝美/超帅 (但目前单身)
         </div>
         <button id="btnStage3" class="btn-primary">我不服，继续复核 💢</button>
       `;
       document.getElementById('btnStage3').onclick = startStage4;
     }
 
-    // ==================== 关卡 4：流氓全选隐私协议 ====================
+    // ==================== 关卡 4：手机流氓全选隐私协议 ====================
     function startStage4() {
       mainCard.innerHTML = `
-        <h1>🛡️ 第三轨：单身联盟隐私授权</h1>
-        <p class="subtitle" style="margin-bottom:1.5rem;">为开启终极脱单绿色通道，请授权以下必要安全权限：</p>
+        <h1>🛡️ 第三轨：隐私安全授权</h1>
+        <p class="subtitle" style="margin-bottom:1.2rem;">为开启终极脱单通道，请授权以下安全权限：</p>
         
         <div class="permission-item">
-          <span>允许系统自动清空下季度所有购物车 🛒</span>
+          <span>自动清空下季度所有购物车 🛒</span>
           <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
         </div>
         <div class="permission-item">
-          <span>允许公开您的朋友圈偷看及屏蔽记录 👁️</span>
+          <span>公开您的朋友圈偷看记录 👁️</span>
           <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
         </div>
-        <div class="permission-item" id="trapItem" style="position:relative;">
-          <span id="trapText">允许520当天无条件向站长发放节日红包 🧧</span>
-          <button id="btnToggleTrap" class="btn-secondary" style="padding:0.3rem 1rem; font-size:0.9rem; border-radius:6px;">取消勾选</button>
+        <div class="permission-item" id="trapItem">
+          <span id="trapText">520无条件向站长发节日红包 🧧</span>
+          <button id="btnToggleTrap" class="btn-secondary" style="padding:2px 8px; font-size:0.75rem; border-radius:6px; width:auto;">取消</button>
         </div>
 
-        <button id="btnStage4" class="btn-primary" style="margin-top:20px; width:100%;">强制同意并提交审查 🚀</button>
+        <button id="btnStage4" class="btn-primary" style="margin-top:10px;">同意并提交审查 🚀</button>
       `;
 
       const btnToggle = document.getElementById('btnToggleTrap');
@@ -579,11 +511,11 @@
 
       btnToggle.onclick = () => {
         toggleCount++;
-        if(toggleCount === 1) { btnToggle.innerText = "拒绝失败"; } 
-        else if(toggleCount === 2) { btnToggle.innerText = "你想得美"; } 
+        if(toggleCount === 1) { btnToggle.innerText = "失败"; } 
+        else if(toggleCount === 2) { btnToggle.innerText = "拒绝无效"; } 
         else {
           btnToggle.style.display = "none";
-          document.getElementById('trapText').innerHTML = "允许520当天无条件向站长发放节日红包 🧧 <b style='color:#ef4444;'>(已强行锁定)</b>";
+          document.getElementById('trapText').innerHTML = "520无条件向站长发节日红包 🧧 <b style='color:#ef4444;'>(锁定)</b>";
         }
       };
 
@@ -593,77 +525,74 @@
     // ==================== 关卡 5：99% 卡死终极心跳 ====================
     function startStage5() {
       const loadingTexts = [
-        '正在向你的大脑植入520防渣隔离霜...',
-        '正在从太空卫星调取你的脱单风水方位...',
-        '系统检测到你已经开始抓狂了...',
+        '正在植入520防渣隔离霜...',
+        '正在调取你的脱单风水方位...',
         '正在拼命解密你的心动对象...',
-        '由于您的魅力值过高，系统正在紧急扩容...'
+        '由于您的魅力值过高，系统正在扩容...'
       ];
 
       mainCard.innerHTML = `
-        <h1>🔄 正在生成 520 终审人格报告</h1>
-        <div class="progress-bound" style="margin: 30px 0;">
+        <h1>🔄 正在生成 520 终审报告</h1>
+        <div class="progress-bound" style="margin: 20px 0;">
           <div id="progressBar" class="progress-bar"></div>
         </div>
-        <p id="progressText" style="color:#db2777; font-weight:bold;">准备初始化数据结构...</p>
+        <p id="progressText" style="color:#db2777; font-weight:bold; font-size:0.85rem;">准备数据结构...</p>
       `;
 
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
       let width = 0;
-      let textIndex = 0;
 
       const interval = setInterval(() => {
-        if (width < 82) { width += Math.random() * 5; } 
-        else if (width >= 82 && width < 99) { width += Math.random() * 0.4; }
+        if (width < 85) { width += Math.random() * 6; } 
+        else if (width >= 85 && width < 99) { width += Math.random() * 0.3; }
 
         progressBar.style.width = `${width}%`;
         
-        if (Math.random() > 0.88 && textIndex < loadingTexts.length) {
+        if (Math.random() > 0.85) {
           progressText.innerText = loadingTexts[Math.floor(Math.random() * loadingTexts.length)];
         }
 
         if (width >= 99) {
           clearInterval(interval);
           progressBar.style.width = '99%';
-          progressText.innerHTML = `⚠️ <span style="color:#ef4444; font-weight:bold;">Fatal Error：由于用户颜值突破天际，核心机房被萌烧了！</span>`;
-          setTimeout(() => { triggerFinalShock(); }, 2600);
+          progressText.innerHTML = `⚠️ <span style="color:#ef4444; font-size:0.8rem;">Fatal Error：由于用户颜值太高，核心机房烧毁了！</span>`;
+          setTimeout(() => { triggerFinalShock(); }, 2200);
         }
       }, 90);
     }
 
-    // ==================== 终极小丑反转（加入双栏照片展示） ====================
+    // ==================== 终极反转（手机端完美上下排版） ====================
     function triggerFinalShock() {
-      // 改变布局为炫酷的高级分栏展示
       mainCard.classList.add('final-layout');
       mainCard.style.border = "3px solid #ec4899";
-      mainCard.style.boxShadow = "0 0 50px rgba(236, 72, 153, 0.4)";
+      mainCard.style.boxShadow = "0 0 30px rgba(236, 72, 153, 0.4)";
 
       mainCard.innerHTML = `
         <div class="final-left">
-          <h1 style="font-size: 3.5rem; margin: 0; display: inline-block;">🤡</h1>
-          <h2 style="color:#db2777; font-size:2.2rem; margin: 5px 0 15px 0;">密保验证彻底失败！</h2>
-          <p style="font-size:1.15rem; line-height:1.7; color:#4c0519; margin: 0 0 15px 0;">
-            经过五轨全方位深度测试，系统最终判定：<br>
-            <span style="color:#e11d48; font-weight:bold;">【嘴硬天花板】 【自恋大宗师】 【全自动发红包机】</span><br>
+          <h1 style="font-size: 2.8rem; margin: 0;">🤡</h1>
+          <h2 style="color:#db2777; font-size:1.4rem; margin: 5px 0 10px 0;">密保验证彻底失败！</h2>
+          <p style="font-size:0.9rem; line-height:1.5; color:#4c0519; margin: 0 0 10px 0;">
+            系统最终判定：<br>
+            <span style="color:#e11d48; font-weight:bold;">【嘴硬天花板】 【全自动发红包机】</span><br>
             折腾了这么久，原来小丑竟是你自己！
           </p>
-          <div style="background: rgba(244,63,94,0.06); padding: 12px 15px; border-radius: 12px; font-size: 0.95rem; color: #881337; line-height: 1.6; border: 1px dashed #fbcfe8;">
+          <div style="background: rgba(244,63,94,0.05); padding: 10px; border-radius: 10px; font-size: 0.8rem; color: #881337; line-height: 1.5; border: 1px dashed #fbcfe8; text-align: left;">
             📢 <b style="color:#e11d48;">粉色特赦令：</b><br>
-            鉴于你如此有耐心地闯完了所有流氓关卡，特此免除本年度单身罚款。520 没什么送你的，送你一个大大的清醒大白眼！哈哈哈520快乐！
+            鉴于你如此有耐心闯完关卡，免除本年单身罚款。520送你一个大大的白眼！520快乐！
           </div>
-          <button id="btnEnd" class="btn-primary" style="margin-top: 20px; width: 100%;">
-            我不服！我要截图找你算账 😤
+          <button id="btnEnd" class="btn-primary" style="margin-top: 15px;">
+            我不服！找你算账 😤
           </button>
         </div>
         <div class="final-right">
           <img src="${MY_PHOTO}" alt="小丑本人" class="final-photo">
-          <p style="text-align:center; font-size:0.85rem; color:#db2777; font-weight:bold; margin-top:8px;">☝️ 涉案嫌疑人高清抓拍档案</p>
+          <p style="text-align:center; font-size:0.75rem; color:#db2777; font-weight:bold; margin-top:5px; margin-bottom:0;">☝️ 嫌疑人高清抓拍档案</p>
         </div>
       `;
 
       document.getElementById('btnEnd').addEventListener('click', () => {
-        alert("🚨 情感中心核心提示：\n嫌疑人照片及本次嘴硬数据已无缝上传至本地回忆中心！\n好啦不闹了，祝你 520 每一天都开开心心，今天也要保持快乐哈！");
+        alert("🚨 情感中心提示：\n截图和你的大作已秘密保存在你的脑海中！\n好啦不闹了，祝你 520 每一天都开开心心，今天也要保持快乐哈！");
       });
     }
   </script>
